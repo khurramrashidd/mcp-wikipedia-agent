@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="result-card">
+    <h1 id="articleTitle">{{ result.title }}</h1>
+    
+    <div class="result-meta">
+        <span>⏱️ {{ result.reading_time }} min read</span>
+        <span>📝 {{ result.word_count }} words</span>
+        <span>🌐 Language: {{ result.language | upper }}</span>
+    </div>
+
+    <div class="tags">
+        {% for cat in result.categories %}
+            <span class="tag">{{ cat }}</span>
+        {% endfor %}
+    </div>
+
+    <p class="summary-text" id="summaryText">{{ result.summary }}</p>
+
+    <div class="action-buttons">
+        <a href="{{ result.url }}" target="_blank" style="text-decoration: none;">
+            <button type="button">Read Full Article</button>
+        </a>
+        
+        <button type="button" class="btn-secondary" onclick="readAloud()">🔊 Read Aloud</button>
+        
+        <button type="button" class="btn-secondary" onclick="copyText()">📋 Copy Summary</button>
+        
+        <a href="/" style="text-decoration: none;">
+            <button type="button" class="btn-secondary" style="border-color: var(--text-muted); color: var(--text-muted);">🔙 New Search</button>
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Feature 3 Implementation
+    function readAloud() {
+        const text = document.getElementById('summaryText').innerText;
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel(); // Stop current speech if any
+            const utterance = new SpeechSynthesisUtterance(text);
+            const langParam = "{{ result.language }}";
+            // Map common langs for TTS
+            const langMap = {'en': 'en-US', 'es': 'es-ES', 'fr': 'fr-FR', 'hi': 'hi-IN'};
+            utterance.lang = langMap[langParam] || 'en-US';
+            window.speechSynthesis.speak(utterance);
+        } else {
+            alert("Text-to-speech is not supported in this browser.");
+        }
+    }
+
+    // Feature 6 Implementation
+    function copyText() {
+        const text = document.getElementById('summaryText').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Summary copied to clipboard!");
+        });
+    }
+</script>
+{% endblock %}

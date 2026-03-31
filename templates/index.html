@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="search-container">
+    <h1>Explore the World's Knowledge</h1>
+    <p style="color: var(--text-muted); margin-top: 10px;">Powered by external MCP tool integration</p>
+    
+    {% if error %}
+        <div class="error-msg" style="margin-top: 20px;">{{ error }}</div>
+    {% endif %}
+
+    <form action="/search" method="GET" onsubmit="saveHistory()">
+        <div class="search-box">
+            <select name="lang" id="langSelect">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="hi">Hindi</option>
+            </select>
+            <input type="text" name="query" id="searchInput" placeholder="Search a topic..." required>
+            <button type="submit">Search Tool</button>
+        </div>
+    </form>
+
+    <div class="history-section" id="historySection" style="display: none;">
+        <h3 style="font-size: 1rem; color: var(--text-muted);">Recent Searches</h3>
+        <div class="history-list" id="historyList"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function saveHistory() {
+        const query = document.getElementById('searchInput').value.trim();
+        if(!query) return;
+        let history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+        if(!history.includes(query)) {
+            history.unshift(query);
+            if(history.length > 5) history.pop();
+            localStorage.setItem('searchHistory', JSON.stringify(history));
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        let history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+        if(history.length > 0) {
+            document.getElementById('historySection').style.display = 'block';
+            const list = document.getElementById('historyList');
+            history.forEach(term => {
+                let a = document.createElement('a');
+                a.href = `/search?query=${encodeURIComponent(term)}&lang=en`;
+                a.className = 'history-item';
+                a.textContent = term;
+                list.appendChild(a);
+            });
+        }
+    });
+</script>
+{% endblock %}

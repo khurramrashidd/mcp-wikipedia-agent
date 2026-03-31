@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Wikipedia Agent</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">🤖 MCP Agent</a>
+    <button class="theme-toggle" id="themeToggle">🌓 Toggle Theme</button>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    Agent built with Model Context Protocol architecture | Engineered by Khurram Rashid
+</footer>
+
+<script>
+    // Feature 1: Persistent Dark/Light Mode
+    const toggleBtn = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+    toggleBtn.addEventListener('click', () => {
+        let theme = document.documentElement.getAttribute('data-theme');
+        let targetTheme = theme === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', targetTheme);
+        localStorage.setItem('theme', targetTheme);
+    });
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,44 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# Build / dist
+build/
+dist/
+*.egg-info/
+
+# Docker (optional)
+*.dockerignore
+
+# Pytest cache
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local files
+*.sqlite3
