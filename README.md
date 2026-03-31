@@ -6,7 +6,7 @@ This project is an AI-powered agent built using a **Model Context Protocol (MCP)
 
 Version 2.0 features a completely redesigned, mobile-responsive UI with modern theming and a suite of 10 advanced features designed to enhance user experience and accessibility. The system demonstrates how AI agents can be integrated with real-world tools while maintaining a clear separation between reasoning, tool execution, and the user interface.
 
-👉 **Live Demo:** [https://mcp-wikipedia-agent.onrender.com]
+👉 **Live Demo:** https://mcp-wikipedia-agent.onrender.com
 
 ---
 
