@@ -1,6 +1,6 @@
 # 🤖 MCP Wikipedia Agent 2.0 (Flask & ADK-Ready)
 
-## 📌 Overview
+##  Overview
 
 This project is an AI-powered agent built using a **Model Context Protocol (MCP)**-style architecture. The agent connects to an external data source (Wikipedia) to retrieve structured information, perform data analytics, and generate a highly interactive, user-friendly response. 
 
